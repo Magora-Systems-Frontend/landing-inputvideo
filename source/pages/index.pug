@@ -3,12 +3,14 @@ extends ../layouts/home
 include ../modules/footer/footer
 include ../modules/header/header
 include ../modules/main-page/main-page
+include ../modules/dropvideo/dropvideo
 
 	
 block header
 	+header()
-
+	
 block main
+	+dropvideo()
 	+main-page()
 
 block footer

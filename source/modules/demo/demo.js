@@ -1,8 +1,6 @@
 import skrollr from "skrollr";
 import ScrollReveal from "scrollreveal";
 
-import Notification from "@/modules/notification/notification";
-
 import { $ } from "@/modules/_utils/dom/select";
 import ready from "@/modules/_utils/dom/ready";
 

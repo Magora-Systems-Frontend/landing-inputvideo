@@ -1,0 +1,8 @@
+
+mixin dropvideo()
+	div.video_wrapper
+		video(width='400' id='videoBlock' hidden controls)
+			source(src='' id="video_here")
+		form(action='/file-upload' class='dropzone' )
+			input(type='file' name='file' accept='video/*' id="video_input")
+			

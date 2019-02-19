@@ -6,7 +6,6 @@ import * as serviceWorker from "./helpers/serviceWorker";
 import ready from "@/modules/_utils/dom/ready";
 
 import Alert from "@/modules/alert/alert";
-import Accordion from "@/modules/accordion/accordion";
 import Browsehappy from "@/modules/browsehappy/browsehappy";
 import Tabs from "@/modules/tabs/tabs";
 import ProgressBar from "@/modules/progress-bar/progress-bar";
@@ -23,10 +22,9 @@ import MainMenu from "@/modules/main-menu/main-menu";
 import Tooltip from "@/modules/tooltip/tooltip";
 import Modal from "@/modules/modal/modal";
 import NetworkStatus from "@/modules/network-status/network-status";
-
+import Dropvideo from "@/modules/dropvideo/dropvideo";
 // Factories class based plugins
 Alert(".alert");
-Accordion(".accordion");
 Browsehappy(".browsehappy");
 Tabs(".tabs");
 ProgressBar(".progress-bar");
@@ -40,6 +38,7 @@ ScrollTop(".scroll-top");
 StarRating(".star-rating");
 InputPassword(".input_type_password");
 NetworkStatus();
+Dropvideo();
 
 // Simple functional plugins
 MainMenu();
@@ -58,7 +57,6 @@ serviceWorker.unregister();
 
 module.exports = {
   Alert,
-  Accordion,
   Tabs,
   ProgressBar,
   Spoiler,
@@ -68,5 +66,6 @@ module.exports = {
   Table,
   ScrollTop,
   StarRating,
-  InputPassword
+  InputPassword,
+  Dropvideo
 };
