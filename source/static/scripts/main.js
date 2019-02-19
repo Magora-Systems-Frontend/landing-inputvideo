@@ -5,7 +5,6 @@ import * as serviceWorker from "./helpers/serviceWorker";
 
 import ready from "@/modules/_utils/dom/ready";
 
-import Alert from "@/modules/alert/alert";
 import Browsehappy from "@/modules/browsehappy/browsehappy";
 import Offcanvas from "@/modules/offcanvas/offcanvas";
 import File from "@/modules/file/file";
@@ -15,12 +14,10 @@ import ScrollTop from "@/modules/scroll-top/scroll-top";
 import InputPassword from "@/modules/input/inputPassword";
 import Demo from "@/modules/demo/demo";
 import MainMenu from "@/modules/main-menu/main-menu";
-import Modal from "@/modules/modal/modal";
 import NetworkStatus from "@/modules/network-status/network-status";
 import Dropvideo from "@/modules/dropvideo/dropvideo";
 
 // Factories class based plugins
-Alert(".alert");
 Browsehappy(".browsehappy");
 Offcanvas();
 File(".file");
@@ -34,7 +31,6 @@ Dropvideo();
 // Simple functional plugins
 Demo();
 MainMenu();
-Modal();
 
 ready(function() {
   FastClick.attach(document.body);
@@ -47,7 +43,6 @@ ready(function() {
 serviceWorker.unregister();
 
 module.exports = {
-  Alert,
   // Offcanvas,
   File,
   Code,
