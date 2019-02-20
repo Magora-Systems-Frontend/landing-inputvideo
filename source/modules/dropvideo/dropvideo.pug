@@ -1,8 +1,17 @@
-
 mixin dropvideo()
 	div.video_wrapper
-		video(width='400' id='videoBlock' hidden controls)
-			source(src='' id="video_here")
-		form(action='/file-upload' class='dropzone' )
-			input(type='file' name='file' accept='video/*' id="video_input")
-			
+		.row.justify-content-center
+			.col-12.col-md-4.d-flex.align-items-center.justify-content-center.flex-wrap.insidePadding
+				h2 Загрузите ваше видео
+
+			.col-12.col-md-4.d-flex.align-items-center.justify-content-center.flex-wrap.insidePadding
+				form(action='/file-upload' class='' )
+					input(type='file' name='file' accept='video/*' id="video_input" multiple)
+				form(action='/file-upload' class='dropzone needsclick dz-clickable' )
+					.dz-message.needsclick Drop files here or click to upload.
+					input(type='file' name='file' accept='video/*' id="video_input2" multiple hidden)
+
+			.col-12.col-md-4.d-flex.align-items-center.justify-content-center.insidePadding
+				video(id='videoBlock' controls hidden)
+					source(src='' id="video_here" )
+				h2(id='titlePlaceholder') Здесь будет ваше видео

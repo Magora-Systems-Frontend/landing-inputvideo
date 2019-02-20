@@ -5,12 +5,20 @@ class Dropvideo extends Plugin {
     return {};
   }
 
-  showVideo() {
-    document.querySelector("#videoBlock").hidden = false;
-    const source = document.querySelector("#video_here");
-    const videoFile = document.querySelector("#video_input").files[0];
-    source.src = URL.createObjectURL(videoFile);
-    source.parentNode.load();
+  showVideo(file) {
+    const format = file.target.value;
+    const check = format.match(/\.(mp4|webm|ogg)/);
+    if (check) {
+      document.querySelector("#videoBlock").hidden = false;
+      document.querySelector("#titlePlaceholder").hidden = true;
+      const source = document.querySelector("#video_here");
+      const videoFile = document.querySelector("#video_input").files[0];
+      source.src = URL.createObjectURL(videoFile);
+      source.parentNode.load();
+    } else {
+      alert("This file format is not supported");
+      document.querySelector("#video_input").value = "";
+    }
   }
 
   init() {}
