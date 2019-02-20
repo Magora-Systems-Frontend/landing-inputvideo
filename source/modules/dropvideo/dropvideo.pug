@@ -7,7 +7,7 @@ mixin dropvideo()
 			.col-12.col-md-4.d-flex.align-items-center.justify-content-center.flex-wrap.insidePadding
 				form(action='/file-upload' class='' )
 					input(type='file' name='file' accept='video/*' id="video_input" multiple)
-				form(action='/file-upload' class='dropzone needsclick dz-clickable' )
+				form(action='' class='dropzone needsclick dz-clickable' id='myId')
 					.dz-message.needsclick Drop files here or click to upload.
 					input(type='file' name='file' accept='video/*' id="video_input2" multiple hidden)
 

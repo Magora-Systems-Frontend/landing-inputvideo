@@ -21,6 +21,20 @@ class Dropvideo extends Plugin {
     }
   }
 
+  validateDuration() {
+    const duration = document.querySelector("#videoBlock").duration;
+
+    if (duration < 5 || duration > 30) {
+      const source = document.querySelector("#video_here");
+      document.querySelector("#video_input").value = "";
+      source.src = "";
+      source.parentNode.load();
+      document.querySelector("#videoBlock").hidden = true;
+      document.querySelector("#titlePlaceholder").hidden = false;
+      alert("Invalid duration video");
+    }
+  }
+
   init() {}
 
   buildCache() {}
@@ -29,6 +43,9 @@ class Dropvideo extends Plugin {
     document
       .querySelector(".video_wrapper")
       .addEventListener("change", this.showVideo);
+    document
+      .querySelector("#videoBlock")
+      .addEventListener("canplaythrough", this.validateDuration);
   }
 }
 
