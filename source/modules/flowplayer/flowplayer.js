@@ -15,6 +15,18 @@ class Flowplayer extends Plugin {
       fileElem = document.getElementById("file"),
       info = document.getElementById("info");
 
+    var clip = {
+      cuepoints: [2, 4, 6],
+      sources: [{ type: "video/mp4", src: "//edge.flowplayer.org/bauhaus.mp4" }]
+    };
+
+    flowplayer(container, {
+      ratio: false,
+      autoplay: false,
+      embed: false,
+      clip: clip
+    });
+
     if (!flowplayer.support.video) {
       choice.innerHTML =
         "This demo only works in browsers supporting HTML5 video.";
@@ -36,11 +48,9 @@ class Flowplayer extends Plugin {
       });
 
       if (canplay && !isaudio) {
-        let clip = {
-          sources: [{ type: file.type, src: URL.createObjectURL(file) }]
-        };
-
-        let clip1 = {
+        let uploadVideo1 = {
+          cuepoints: [3],
+          title: "Uploaded",
           sources: [{ type: file.type, src: URL.createObjectURL(file) }]
         };
 
@@ -49,27 +59,23 @@ class Flowplayer extends Plugin {
             ratio: false,
             autoplay: true,
             embed: false,
-            clip: clip,
-            cuepoints: [2, 4]
+            clip: clip
           }).on("ready", function(e, api, video) {
             // for info
             document.getElementById("src").innerHTML = video.src;
           });
 
-          let actorName = {
-            cuepoints: [2],
-            title: "Имя актёра"
-          };
-          let main = {
-            cuepoints: [4],
-            title: ""
-          };
-
           api.on("cuepoint", function(e, api, cuepoint) {
-            if (cuepoint.time === actorName.cuepoints[0]) {
-              info.innerHTML = actorName.title;
-            } else if (cuepoint.time === main.cuepoints[0]) {
-              info.innerHTML = main.title;
+            if (cuepoint.time === clip.cuepoints[0]) {
+              info.innerHTML = uploadVideo1.title;
+              api.load(uploadVideo1, function(e, api) {
+                api.disable(false);
+              });
+            } else if (cuepoint.time === uploadVideo1.cuepoints[0]) {
+              info.innerHTML = "";
+              api.disable(false).load(clip, function(e, api) {
+                api.seek(clip.cuepoints[2]);
+              });
             }
           });
         } else {
