@@ -8,15 +8,16 @@ class Flowplayer extends Plugin {
   loadPage() {
     let api,
       container = document.getElementById("player"),
-      choice = document.getElementById("choice"),
+      choice1 = document.querySelector("#choice1"),
       typewarning = document.getElementById("typewarning"),
       audiowarning = document.getElementById("audiowarning"),
       video = document.createElement("video"),
-      fileElem = document.getElementById("file"),
+      fileElem1 = document.getElementById("file1"),
+      fileElem2 = document.getElementById("file2"),
       info = document.getElementById("info");
 
     var clip = {
-      cuepoints: [2, 4, 6],
+      cuepoints: [2, 4, 6, 8],
       sources: [{ type: "video/mp4", src: "//edge.flowplayer.org/bauhaus.mp4" }]
     };
 
@@ -28,66 +29,76 @@ class Flowplayer extends Plugin {
     });
 
     if (!flowplayer.support.video) {
-      choice.innerHTML =
+      choice1.innerHTML =
         "This demo only works in browsers supporting HTML5 video.";
       return;
     }
 
-    fileElem.onchange = function() {
-      let file = fileElem.files[0],
+    let uploadArray = [];
+
+    function handleUpload(Node, number, duration, title) {
+      const choiseSelector = `span.ftype${number + 1}`;
+      const choiseNode = document.querySelector(choiseSelector);
+      let file = Node.files[0],
         canplay = !!video.canPlayType(file.type).replace("no", ""),
         // hls is always considered as audio/mpegurl locally
         // so we cannot avoid a player error without excluding hls video
         isaudio =
           file.type.indexOf("audio/") === 0 && file.type !== "audio/mpegurl";
 
-      choice.querySelector("span.ftype").innerHTML = file.type;
+      choiseNode.innerHTML = file.type;
 
       [typewarning, audiowarning].forEach(function(elem) {
         elem.style.display = "none";
       });
 
       if (canplay && !isaudio) {
-        let uploadVideo1 = {
-          cuepoints: [3],
-          title: "Uploaded",
+        const cuepointsDuration = [];
+        cuepointsDuration[0] = duration;
+
+        uploadArray[number] = {
+          cuepoints: cuepointsDuration,
+          title: title,
           sources: [{ type: file.type, src: URL.createObjectURL(file) }]
         };
 
-        if (api === undefined) {
-          api = flowplayer(container, {
-            ratio: false,
-            autoplay: true,
-            embed: false,
-            clip: clip
-          }).on("ready", function(e, api, video) {
-            // for info
-            document.getElementById("src").innerHTML = video.src;
-          });
+        api = flowplayer(container, {
+          ratio: false,
+          autoplay: true,
+          embed: false,
+          clip: clip
+        }).on("ready", function(e, api, video) {
+          // for info
+          document.getElementById("src").innerHTML = video.src;
+        });
 
-          api.on("cuepoint", function(e, api, cuepoint) {
-            if (cuepoint.time === clip.cuepoints[0]) {
-              info.innerHTML = uploadVideo1.title;
-              api.load(uploadVideo1, function(e, api) {
-                api.disable(false);
-              });
-            } else if (cuepoint.time === uploadVideo1.cuepoints[0]) {
-              info.innerHTML = "";
-              api.disable(false).load(clip, function(e, api) {
-                api.seek(clip.cuepoints[2]);
-              });
-            }
-          });
-        } else {
-          api.load(clip);
-        }
+        api.on("cuepoint", function(e, api, cuepoint) {
+          if (cuepoint.time === clip.cuepoints[number * 2]) {
+            info.innerHTML = uploadArray[number].title;
+            api.load(uploadArray[number], function(e, api) {
+              api.disable(false);
+            });
+          } else if (cuepoint.time === uploadArray[number].cuepoints[0]) {
+            info.innerHTML = "";
+            api.disable(false).load(clip, function(e, api) {
+              api.seek(clip.cuepoints[number * 2 + 1]);
+            });
+          }
+        });
       } else if (!canplay) {
         typewarning.querySelector("span.ftype").innerHTML = file.type;
         typewarning.style.display = "block";
       } else {
         audiowarning.style.display = "block";
       }
-    };
+    }
+
+    fileElem1.addEventListener("change", () =>
+      handleUpload(fileElem1, 0, 3, "Первое видео")
+    );
+    fileElem2.addEventListener("change", () =>
+      handleUpload(fileElem2, 1, 5, "Второе видео")
+    );
   }
 
   init() {
