@@ -16,6 +16,7 @@ import Demo from "@/modules/demo/demo";
 import MainMenu from "@/modules/main-menu/main-menu";
 import NetworkStatus from "@/modules/network-status/network-status";
 import Dropvideo from "@/modules/dropvideo/dropvideo";
+import Flowplayer from "@/modules/flowplayer/flowplayer";
 
 // Factories class based plugins
 Browsehappy(".browsehappy");
@@ -31,6 +32,7 @@ Dropvideo();
 // Simple functional plugins
 Demo();
 MainMenu();
+Flowplayer();
 
 ready(function() {
   FastClick.attach(document.body);
@@ -49,5 +51,6 @@ module.exports = {
   Header,
   ScrollTop,
   InputPassword,
-  Dropvideo
+  Dropvideo,
+  Flowplayer
 };

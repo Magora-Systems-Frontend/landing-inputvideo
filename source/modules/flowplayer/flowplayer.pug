@@ -1,0 +1,21 @@
+mixin flowplayer()
+	.row
+		.col Title
+	.row.d-flex.justify-content-center
+		.col-12.col-md-8
+			p(id="choice" class ='info')
+				input(type='file' id='file' )
+				| File type
+				span.ftype
+			div#player
+				div#typewarning
+					| Your browser cannot play'
+					span#ftype
+					| Please choose a different file.
+				div#audiowarning 'Flowplayer currently does not support audio playback. Please choose a different file.'
+				
+				.fp-ratio
+			p#info
+					
+			p.info Now playing:
+				span#src

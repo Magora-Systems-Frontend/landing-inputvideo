@@ -1,8 +1,13 @@
+@import "customplayer.styl"
+
 .video_wrapper
+	position relative
 	padding 20px
 	text-align center
 
 #videoBlock
+	position relative
+	display block
 	margin 15px auto
 	width 100%
 
@@ -14,3 +19,27 @@
 
 .insidePadding
 	padding 20px 10px
+
+.gray-filter
+	filter grayscale(100%)
+
+.load
+	position absolute
+	top 35px
+	left 10px
+	z-index 10
+	width 30px
+	height 30px
+	background-color red
+	animation-name load
+	animation-duration 3s
+	animation-play-state paused
+	animation-iteration-count infinite
+	animation-direction alternate
+
+@keyframes load
+	from
+		margin-left 0
+
+	to
+		margin-left 50px

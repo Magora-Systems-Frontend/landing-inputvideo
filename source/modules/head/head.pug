@@ -33,9 +33,12 @@ mixin head(data)
 
 	// Styles
 	link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+	link(rel="stylesheet" href='https://releases.flowplayer.org/7.2.7/skin/skin.css')
 	link(rel="stylesheet" href=config.path.styles + "/reset.css")
 	link(rel="stylesheet" href=config.path.styles + "/main.css")
-
+	
+	script(src='https://code.jquery.com/jquery-1.12.4.min.js')
+	script(src='https://releases.flowplayer.org/7.2.7/flowplayer.min.js')
 	// Facebook / Open Graph
 	// Facebook: https://developers.facebook.com/docs/sharing/webmasters#markup
 	// Open Graph: http://ogp.me/
@@ -59,6 +62,6 @@ mixin head(data)
 	link(rel="shortcut icon", href="/assets/favicons/favicon.ico")
 	meta(name="msapplication-config", content="/assets/favicons/browserconfig.xml")
 	meta(name="theme-color", content="#ffffff")
-
 	// A list of everything that could go in the head of your document
 	// https://github.com/joshbuchea/HEAD
+

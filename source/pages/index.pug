@@ -4,6 +4,7 @@ include ../modules/footer/footer
 include ../modules/header/header
 include ../modules/main-page/main-page
 include ../modules/dropvideo/dropvideo
+include ../modules/flowplayer/flowplayer
 
 	
 block header
@@ -11,7 +12,8 @@ block header
 	
 	
 block main
-	+dropvideo()
+	+flowplayer()
+	//+dropvideo()
 	//+main-page()
 
 block footer
