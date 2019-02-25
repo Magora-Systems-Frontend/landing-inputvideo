@@ -16,7 +16,7 @@ class Flowplayer extends Plugin {
       fileElem2 = document.getElementById("file2"),
       info = document.getElementById("info");
 
-    var clip = {
+    let clip = {
       cuepoints: [2, 4, 6, 8],
       sources: [{ type: "video/mp4", src: "//edge.flowplayer.org/bauhaus.mp4" }]
     };
@@ -37,8 +37,9 @@ class Flowplayer extends Plugin {
     let uploadArray = [];
 
     function handleUpload(Node, number, duration, title) {
-      const choiseSelector = `span.ftype${number + 1}`;
-      const choiseNode = document.querySelector(choiseSelector);
+      const choiceNode = document.querySelector(`span.ftype${number + 1}`);
+      const source = document.querySelector(`#source${number + 1}`);
+
       let file = Node.files[0],
         canplay = !!video.canPlayType(file.type).replace("no", ""),
         // hls is always considered as audio/mpegurl locally
@@ -46,7 +47,10 @@ class Flowplayer extends Plugin {
         isaudio =
           file.type.indexOf("audio/") === 0 && file.type !== "audio/mpegurl";
 
-      choiseNode.innerHTML = file.type;
+      source.src = URL.createObjectURL(file);
+      source.parentNode.load();
+
+      choiceNode.innerHTML = file.type;
 
       [typewarning, audiowarning].forEach(function(elem) {
         elem.style.display = "none";
@@ -67,14 +71,18 @@ class Flowplayer extends Plugin {
           autoplay: true,
           embed: false,
           clip: clip
-        }).on("ready", function(e, api, video) {
+        });
+
+        api.on("ready", function(e, api, video) {
           // for info
           document.getElementById("src").innerHTML = video.src;
         });
 
         api.on("cuepoint", function(e, api, cuepoint) {
           if (cuepoint.time === clip.cuepoints[number * 2]) {
-            info.innerHTML = uploadArray[number].title;
+            info.innerHTML = document.querySelector(
+              `#titleVideo${number + 1}`
+            ).value;
             api.load(uploadArray[number], function(e, api) {
               api.disable(false);
             });
@@ -86,7 +94,7 @@ class Flowplayer extends Plugin {
           }
         });
       } else if (!canplay) {
-        typewarning.querySelector("span.ftype").innerHTML = file.type;
+        typewarning.querySelector("span#ftype").innerHTML = file.type;
         typewarning.style.display = "block";
       } else {
         audiowarning.style.display = "block";

@@ -2,28 +2,40 @@ mixin flowplayer()
 	.row
 		.col Title
 	.row.d-flex.justify-content-center
-		.col-12.col-md-8
+		.col-12.col-md-5
 			p(id="choice1" class ='info')
 				input(type='file' id='file1' )
 				| File type
 				span.ftype1
+			p
+				| Заголовок первого видео 	
+				input(id='titleVideo1')
 				
+			video(id='videoBlock1' controls)
+				source(src='' id='source1')
+		.col-12.col-md-5
 			p(id="choice2" class ='info')
 				input(type='file' id='file2' )
 				| File type
 				span.ftype2
+			p
+				| Заголовок второго видео 
+				input(id='titleVideo2')
 				
-			
-			
+			video(id='videoBlock2' controls)
+				source(src='' id='source2')
+		.col-12.col-md-8
 			div#player
-				div#typewarning
-					| Your browser cannot play'
-					span#ftype
-					| Please choose a different file.
-				div#audiowarning 'Flowplayer currently does not support audio playback. Please choose a different file.'
-				
 				.fp-ratio
+					
 			p#info
+			
+			div#durationwarning Required video duration 5 - 30 seconds
+			div#typewarning
+				| Your browser cannot play'
+				span#ftype
+				| Please choose a different file.
+			div#audiowarning 'Flowplayer currently does not support audio playback. Please choose a different file.'
 					
 			p.info Now playing:
 				span#src
