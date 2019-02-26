@@ -1,9 +1,11 @@
 import path from "path";
 import webpack from "webpack";
+import dotenv from "dotenv";
 import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
 import CircularDependencyPlugin from "circular-dependency-plugin";
 import DuplicatePackageCheckerPlugin from "duplicate-package-checker-webpack-plugin";
 import HappyPack from "happypack";
+dotenv.config();
 
 const NODE_ENV = process.env.NODE_ENV ? "production" : "development";
 const isDevelopment = NODE_ENV === "development";
@@ -51,7 +53,8 @@ let options = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
+      "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
+      "process.env.FACEBOOK_APP_ID": JSON.stringify(process.env.FACEBOOK_APP_ID)
     }),
     new CaseSensitivePathsPlugin(),
     new CircularDependencyPlugin({

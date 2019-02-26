@@ -17,6 +17,7 @@ import MainMenu from "@/modules/main-menu/main-menu";
 import NetworkStatus from "@/modules/network-status/network-status";
 import Dropvideo from "@/modules/dropvideo/dropvideo";
 import Flowplayer from "@/modules/flowplayer/flowplayer";
+import ShareButtons from "@/modules/share-buttons/share-buttons";
 
 // Factories class based plugins
 Browsehappy(".browsehappy");
@@ -28,6 +29,7 @@ ScrollTop(".scroll-top");
 InputPassword(".input_type_password");
 NetworkStatus();
 Dropvideo();
+ShareButtons(".share-buttons");
 
 // Simple functional plugins
 Demo();
@@ -52,5 +54,6 @@ module.exports = {
   ScrollTop,
   InputPassword,
   Dropvideo,
-  Flowplayer
+  Flowplayer,
+  ShareButtons
 };

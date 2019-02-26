@@ -1,0 +1,9 @@
+include ../button/button
+
+mixin share-buttons()
+	-
+		var fb = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=" + process.env.FACEBOOK_APP_ID + "&autoLogAppEvents=1";
+
+	div.share-buttons
+		script(async defer src=fb)
+		script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
